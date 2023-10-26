@@ -1,18 +1,8 @@
 //
 //  WebService.swift
-//  TestApp
 //
 //  Created by Krunal on 18/07/20.
 //  Copyright © 2020 Krunal. All rights reserved.
-//
-
-//
-//  WebService.swift
-//  TaxiDriver
-//
-//  Created by Dilip Manek on 01/08/18.
-//  Copyright © 2018 Dilip Manek. All rights reserved.
-//
 
 import UIKit
 import SwiftyJSON
