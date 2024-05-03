@@ -4,6 +4,129 @@
 //  Created by Krunal on 18/07/20.
 //  Copyright © 2020 Krunal. All rights reserved.
 
+
+
+//API call function using session 
+// import Foundation
+
+// struct APIResponse<T: Codable>: Codable {
+//     let data: T
+// }
+
+// func callAPI<T: Codable>(url: URL, payload: [String: Any], completion: @escaping (Result<T, Error>) -> Void) {
+//     var request = URLRequest(url: url)
+//     request.httpMethod = "POST"
+//     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//     request.httpBody = try? JSONSerialization.data(withJSONObject: payload)
+    
+//     let session = URLSession.shared
+//     let task = session.dataTask(with: request) { (data, response, error) in
+//         if let error = error {
+//             completion(.failure(error))
+//             return
+//         }
+        
+//         if let data = data {
+//             let decoder = JSONDecoder()
+//             do {
+//                 let apiResponse = try decoder.decode(APIResponse<T>.self, from: data)
+//                 completion(.success(apiResponse.data))
+//             } catch {
+//                 completion(.failure(error))
+//             }
+//         }
+//     }
+    
+//     task.resume()
+// }
+
+// How to call api
+// struct User: Codable {
+//     let name: String
+//     let email: String
+// }
+
+// let url = URL(string: "https://example.com/api/users")!
+// let payload = ["name": "John Doe", "email": "john.doe@example.com"]
+
+// callAPI(url: url, payload: payload) { (result: Result<User, Error>) in
+//     switch result {
+//     case .success(let user):
+//         print("User: \(user.name), Email: \(user.email)")
+//     case .failure(let error):
+//         print("Error: \(error)")
+//     }
+// }
+
+
+
+// import Foundation
+
+// class APIManager {
+//     static let shared = APIManager()
+    
+//     private init() {}
+    
+//     func callAPI<T: Codable>(endpoint: String, method: String = "GET", payload: [String: Any]? = nil, headers: [String: String]? = nil, completion: @escaping (Result<T, Error>) -> Void) {
+//         guard let url = URL(string: endpoint) else {
+//             completion(.failure(NSError(domain: "", code: -1, userInfo: nil)))
+//             return
+//         }
+        
+//         var request = URLRequest(url: url)
+//         request.httpMethod = method
+//         headers?.forEach { key, value in
+//             request.setValue(value, forHTTPHeaderField: key)
+//         }
+        
+//         if let payload = payload {
+//             let jsonData = try? JSONSerialization.data(withJSONObject: payload)
+//             request.httpBody = jsonData
+//         }
+        
+//         let session = URLSession.shared
+//         let task = session.dataTask(with: request) { (data, response, error) in
+//             if let error = error {
+//                 completion(.failure(error))
+//                 return
+//             }
+            
+//             guard let data = data else {
+//                 completion(.failure(NSError(domain: "", code: -1, userInfo: nil)))
+//                 return
+//             }
+            
+//             let decoder = JSONDecoder()
+//             do {
+//                 let response = try decoder.decode(T.self, from: data)
+//                 completion(.success(response))
+//             } catch {
+//                 completion(.failure(error))
+//             }
+//         }
+        
+//         task.resume()
+//     }
+// }
+
+
+
+
+// struct User: Codable {
+//     let name: String
+//     let email: String
+// }
+
+// APIManager.shared.callAPI(endpoint: "https://example.com/api/users/1") { (result: Result<User, Error>) in
+//     switch result {
+//     case .success(let user):
+//         print("User: \(user.name), Email: \(user.email)")
+//     case .failure(let error):
+//         print("Error: \(error)")
+//     }
+// }
+
+
 import UIKit
 import SwiftyJSON
 import Alamofire
